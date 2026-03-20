@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>CITRIL Kids Play Area · Trichy</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:    #0A0F1C;
+  --cream:  #F2EAD8;
+  --cream2: #D9CEBC;
+  --coral:  #FF4D2E;
+  --coral2: #FF7055;
+  --dim:    #6B6456;
+  --line:   rgba(242,234,216,0.1);
+}
+
+html{ height:100%; -webkit-text-size-adjust:100% }
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);
+  color:var(--cream);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* grain */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.7;
+}
+/* ambient ring */
+body::after{
+  content:'';
+  position:fixed;
+  top:-30vw;right:-20vw;
+  width:80vw;height:80vw;
+  border:1px solid rgba(255,77,46,0.1);
+  border-radius:50%;
+  pointer-events:none;z-index:0;
+}
+
+.page{
+  position:relative;z-index:1;
+  max-width:480px;
+  margin:0 auto;
+  padding:0 0 env(safe-area-inset-bottom,24px);
+}
+
+/* ═══════ HERO ═══════ */
+.hero{
+  padding:3rem 1.6rem 2.8rem;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:2.5rem;
+}
+
+/* ── BIG LOGO ── */
+.logo-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:0.5rem;
+  animation:fadeIn 0.7s ease both;
+}
+.logo-circle{
+  /*
+    ┌─────────────────────────────────────┐
+    │  REPLACE THIS BLOCK WITH YOUR SVG  │
+    │                                     │
+    │  Option A – img tag:                │
+    │  <img src="citril.svg" alt="CITRIL" │
+    │       style="width:100%;height:100%"│
+    │       />                            │
+    │                                     │
+    │  Option B – inline SVG:             │
+    │  paste your <svg> here directly     │
+    └─────────────────────────────────────┘
+  */
+  width:120px;height:120px;
+  border-radius:50%;
+  border:1.5px solid rgba(242,234,216,0.15);
+  background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  box-shadow:0 0 0 8px rgba(255,77,46,0.05), 0 0 0 16px rgba(255,77,46,0.025);
+}
+.logo-circle svg,
+.logo-circle img{
+  width:100%;height:100%;
+  object-fit:contain;border-radius:50%;
+}
+/* placeholder text inside the circle */
+.logo-placeholder{
+  font-family:'Fraunces',serif;
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(242,234,216,0.3);
+  text-align:center;
+  line-height:1.5;
+  padding:0 10px;
+}
+
+/* thin line under logo */
+.logo-line{
+  width:1px;
+  height:28px;
+  background:linear-gradient(to bottom, rgba(255,77,46,0.5), transparent);
+  margin-top:1rem;
+}
+
+/* ── HOOK ── */
+.hook-area{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hook{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.5rem,11vw,3.4rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-0.02em;
+  color:var(--cream);
+  margin-bottom:1.3rem;
+  animation:slideUp 0.7s 0.2s ease both;
+}
+.hook em{
+  font-style:italic;
+  color:var(--coral);
+}
+
+.sub-hook{
+  font-size:0.9rem;
+  font-weight:300;
+  color:var(--cream2);
+  line-height:1.75;
+  max-width:290px;
+  margin-bottom:2.2rem;
+  animation:slideUp 0.7s 0.3s ease both;
+}
+
+/* ── CTAs ── */
+.cta-group{
+  display:flex;
+  flex-direction:column;
+  gap:0.7rem;
+  animation:slideUp 0.7s 0.4s ease both;
+}
+
+.btn-primary{
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  background:var(--coral);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.9rem;font-weight:500;letter-spacing:0.04em;
+  padding:1rem 1.5rem;
+  border-radius:100px;
+  text-decoration:none;
+  transition:background 0.2s,transform 0.15s;
+}
+.btn-primary:active{transform:scale(0.97)}
+.btn-primary:hover{background:var(--coral2)}
+
+.btn-ghost{
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  background:transparent;
+  color:var(--cream2);
+  font-family:'DM Sans',sans-serif;
+  font-size:0.85rem;font-weight:400;
+  padding:0.9rem 1.5rem;
+  border-radius:100px;
+  text-decoration:none;
+  border:1px solid var(--line);
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-ghost:hover{border-color:rgba(242,234,216,0.3);color:var(--cream)}
+
+/* scroll hint */
+.scroll-hint{
+  text-align:center;
+  animation:fadeIn 1s 1s ease both;
+}
+.scroll-hint span{
+  display:block;
+  font-size:0.6rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--dim);
+  margin-bottom:0.4rem;
+}
+.scroll-arrow{
+  display:inline-block;color:var(--dim);font-size:1.1rem;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ═══════ DIVIDER ═══════ */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--line) 30%,var(--line) 70%,transparent);
+  margin:0 1.6rem;
+}
+
+/* ═══════ CONTACT ═══════ */
+.section{padding:2.5rem 1.6rem}
+.section-eyebrow{
+  font-size:0.6rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--coral);margin-bottom:1.8rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.section-eyebrow::after{
+  content:'';flex:1;height:1px;background:var(--line);
+}
+
+.contact-list{display:flex;flex-direction:column}
+
+.contact-row{
+  display:flex;align-items:center;gap:1.1rem;
+  padding:1.15rem 0;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;color:inherit;
+  position:relative;overflow:hidden;
+  transition:padding-left 0.2s;
+}
+.contact-row:first-child{border-top:1px solid var(--line)}
+.contact-row::before{
+  content:'';
+  position:absolute;left:-100%;top:0;
+  width:3px;height:100%;
+  background:var(--coral);
+  transition:left 0.2s;
+}
+.contact-row:hover{padding-left:0.7rem}
+.contact-row:hover::before{left:0}
+
+.c-icon{
+  width:34px;height:34px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.c-body{flex:1;min-width:0}
+.c-label{
+  font-size:0.58rem;font-weight:500;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:0.22rem;
+}
+.c-value{
+  font-size:0.95rem;font-weight:400;
+  color:var(--cream);line-height:1.45;
+}
+.c-arrow{
+  color:var(--dim);font-size:0.9rem;flex-shrink:0;
+  transition:color 0.2s,transform 0.2s;
+}
+.contact-row:hover .c-arrow{color:var(--coral);transform:translateX(3px)}
+
+/* ═══════ MAP ═══════ */
+.map-section{padding:0 1.6rem 3rem}
+.map-section .section-eyebrow{margin-bottom:1rem}
+.map-frame{
+  width:100%;height:240px;border:none;
+  border-radius:16px;overflow:hidden;display:block;
+  filter:grayscale(15%) contrast(1.05);
+  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+}
+
+/* ═══════ FOOTER ═══════ */
+.footer{
+  padding:1.5rem 1.6rem 2.5rem;
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:0.5rem;
+}
+.footer-brand{
+  font-family:'Fraunces',serif;
+  font-size:0.85rem;font-weight:700;
+  color:var(--coral);letter-spacing:0.08em;
+}
+.footer-copy{font-size:0.65rem;color:var(--dim)}
+
+/* ═══════ ADMIN ═══════ */
+#admin-panel{
+  display:none;
+  position:fixed;bottom:1.2rem;right:1.2rem;
+  z-index:999;
+  background:#0f1422;
+  border:1px solid rgba(255,77,46,0.4);
+  border-radius:14px;padding:1rem 1.3rem;
+  min-width:170px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+}
+#admin-panel.on{display:block}
+#admin-panel h3{
+  font-size:0.55rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--coral);margin-bottom:0.5rem;
+}
+.a-loc{font-size:0.75rem;color:var(--cream2);margin-bottom:0.8rem}
+.a-row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.a-label{font-size:0.7rem;color:var(--dim)}
+.a-count{
+  font-family:'Fraunces',serif;
+  font-size:2rem;font-weight:900;
+  color:#FFD600;line-height:1;
+}
+
+/* ═══════ ANIMATIONS ═══════ */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+@media(min-width:540px){
+  .hero,.section,.map-section{padding-left:2rem;padding-right:2rem}
+  .divider{margin:0 2rem}
+  .footer{padding-left:2rem;padding-right:2rem}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+
+    <!-- BIG LOGO -->
+    <div class="logo-wrap">
+      <div class="logo-circle">
+          <picture>
+            <source srcset="logo.webp" type="image/webp">
+            <img src="logo.png" loading="lazy" alt="CITRIL Kids Play Area" style="width:100%;height:100%">
+          </picture>
+      </div>
+      <div class="logo-line"></div>
+    </div>
+
+    <!-- HOOK + CTA -->
+    <div class="hook-area">
+      <h1 class="hook">Four walls<br>can't create<br><em>Happy Childhoods.</em></h1>
+      <p class="sub-hook">Let your child explore, play, and discover real joy.</p>
+      <div class="cta-group">
+        <a href="tel:+919578488396" class="btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call to Book a Visit
+        </a>
+        <a href="https://www.instagram.com/citrilkidsplay" target="_blank" rel="noopener" class="btn-ghost">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          @citrilkidsplay
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Find us</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section">
+    <div class="section-eyebrow">Get in touch</div>
+    <div class="contact-list">
+
+      <a class="contact-row" href="tel:+919578488396">
+        <div class="c-icon">
+          <svg width="18" height="18" fill="none" stroke="#FF4D2E" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.07 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="c-body">
+          <div class="c-label">Phone</div>
+          <div class="c-value">+91 95784 88396</div>
+        </div>
+        <span class="c-arrow">→</span>
+      </a>
+
+      <a class="contact-row" href="https://www.instagram.com/citrilkidsplay" target="_blank" rel="noopener">
+        <div class="c-icon">
+          <svg width="18" height="18" fill="none" stroke="#FF4D2E" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#FF4D2E" stroke="none"/></svg>
+        </div>
+        <div class="c-body">
+          <div class="c-label">Instagram</div>
+          <div class="c-value">@citrilkidsplay</div>
+        </div>
+        <span class="c-arrow">→</span>
+      </a>
+
+      <!--
+        ADDRESS → opens Google Maps directions
+        REPLACE the href below with your own Google Maps directions link
+        e.g. https://maps.google.com/?daddr=10.796242,78.759649
+      -->
+      <a class="contact-row" href="https://maps.app.goo.gl/6QeZ7rrxnFuYhecZ7" target="_blank" rel="noopener">
+        <div class="c-icon">
+          <svg width="18" height="18" fill="none" stroke="#FF4D2E" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="c-body">
+          <div class="c-label">Address · Tap for Directions</div>
+          <div class="c-value">Plot 21, Balaji Nagar 2nd Cross<br>Kattur, Tiruchirappalli</div>
+        </div>
+        <span class="c-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ MAP ═══ -->
+  <div class="map-section">
+    <div class="section-eyebrow">Location</div>
+    <iframe
+      class="map-frame"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d310.01458227953475!2d78.75964924849973!3d10.796242130445618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf360d4641821%3A0xb843838a7ee2e43b!2sCITRIL!5e1!3m2!1sen!2sin!4v1774025701203!5m2!1sen!2sin"
+      allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="CITRIL Location">
+    </iframe>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <span class="footer-brand">CITRIL</span>
+    <span class="footer-copy">© 2025 Kids Play Area, Trichy</span>
+  </footer>
+
+</div>
+
+<!-- ═══ ADMIN PANEL ═══ -->
+<div id="admin-panel">
+  <h3>Admin · Visitor Stats</h3>
+  <div class="a-loc" id="a-loc">Billboard E · Location 5</div>
+  <div class="a-row">
+    <span class="a-label">Visits</span>
+    <span class="a-count" id="a-count">…</span>
+  </div>
+</div>
+
+<script>
+const NS  = "citril-2025";
+const KEY = "loc5";
+
+if (!sessionStorage.getItem(`${NS}-${KEY}`)) {
+  fetch(`https://api.counterapi.dev/v1/${NS}/${KEY}/up`, {
+    method: "GET",
+    keepalive: true
+  });
+  sessionStorage.setItem(`${NS}-${KEY}`, "1");
+}
+</script>
+</body>
+</html>
